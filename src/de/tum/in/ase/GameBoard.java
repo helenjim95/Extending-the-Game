@@ -112,9 +112,9 @@ public class GameBoard {
         while (this.monsters.size() < this.maxMonsters) {
             int x = StudentRandom.randomInt(0, this.sizeX - 1);
             int y = StudentRandom.randomInt(0, this.sizeY - 1);
-            if (this.get(x, y) == EMPTY) {
+            if (this.get(x, y) == '_') {
                 this.monsters.add(new Monster(x, y));
-                boardMatrix[x][y] = 'M';
+                this.set(x, y, 'M');
             } else {
                 generateMonster();
             }
