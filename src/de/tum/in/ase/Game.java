@@ -78,10 +78,16 @@ public class Game {
         Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
         while (!isWon() && !this.hero.isKilled()) {
             gameBoard.printGameBoard();
-
+            List<String> validInput = List.of("u", "d", "l", "r", "su", "sr", "sd", "sl");
+            boolean isValid = false;
             System.out.println("Please enter the first letter of the desired direction:");
             String userInput = scanner.nextLine().toLowerCase();
-            while (!List.of("u", "d", "l", "r", "su", "sr", "sd", "sl").contains(userInput)) {
+            while (!isValid) {
+                for (int g = 0; g < validInput.size(); g++) {
+                    if (validInput.get(g).equals(userInput)) {
+                        isValid = true;
+                    }
+                }
                 System.out.println("This input is not recognized, please enter again!");
                 userInput = scanner.nextLine().toLowerCase();
             }
