@@ -5,6 +5,10 @@ package de.tum.in.ase;
 // Also add a new method called "generateMonster" which will add a monster randomly on the map when the number of the
 // monsters is still lower than "maxMonsters".
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class GameBoard {
 
     private static final int MIN_SIZE = 3;
@@ -15,6 +19,9 @@ public class GameBoard {
     private int sizeX;
     private int sizeY;
     private char[][] boardMatrix;
+
+    private int maxMonsters;
+    private List<Monster> monsters;
 
     public GameBoard(int sizeX, int sizeY) {
         this.sizeX = Math.max(sizeX, MIN_SIZE);
@@ -30,6 +37,9 @@ public class GameBoard {
 
         this.boardMatrix[0][0] = HERO;
         this.boardMatrix[this.sizeX - 1][this.sizeY - 1] = GOAL;
+        this.maxMonsters = sizeX * sizeY / 3;
+        this.monsters = new ArrayList<>();
+        this.generateMonster();
     }
 
     public char get(int x, int y) {
@@ -82,4 +92,32 @@ public class GameBoard {
         this.boardMatrix = boardMatrix;
     }
 
+    public int getMaxMonsters() {
+        return maxMonsters;
+    }
+
+    public void setMaxMonsters(int maxMonsters) {
+        this.maxMonsters = maxMonsters;
+    }
+
+    public List<Monster> getMonsters() {
+        return monsters;
+    }
+
+    public void setMonsters(List<Monster> monsters) {
+        this.monsters = monsters;
+    }
+
+    public void generateMonster() {
+        if (this.monsters.size() < this.maxMonsters) {
+            int x = StudentRandom.randomInt(0, this.sizeX - 1);
+            int y = StudentRandom.randomInt(0, this.sizeY - 1);
+            if (this.get(x, y) == EMPTY) {
+                this.monsters.add(new Monster(x, y));
+                boardMatrix[x][y] = 'M';
+            } else {
+                generateMonster();
+            }
+        }
+    }
 }

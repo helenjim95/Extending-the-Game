@@ -21,40 +21,44 @@ public class Game {
     private GameBoard gameBoard;
     private Hero hero;
 
-    public Game(int sizeX, int sizeY) {
+    public Game(int sizeX, int sizeY, HeroType type) {
         this.gameBoard = new GameBoard(sizeX, sizeY);
-        this.hero = new Hero();
+        if (type == HeroType.MAGE) {
+            this.hero = new Mage(this);
+        } else if (type == HeroType.HUNTER) {
+            this.hero = new Hunter(this);
+        }
     }
 
-    public void moveLeft() {
+    public void moveLeft() throws IllegalMoveException {
         if (this.getHero().getPosX() > 0) {
             move(-1, 0);
         } else {
-            System.out.println("The next move in this direction is outside of the game board, please try another move!");
+            throw new IllegalMoveException("The next move in this direction is outside of the game board, please try another move!");
         }
     }
 
-    public void moveRight() {
+    public void moveRight() throws IllegalMoveException {
         if (this.getHero().getPosX() < this.getGameBoard().getSizeX() - 1) {
             move(1, 0);
         } else {
-            System.out.println("The next move in this direction is outside of the game board, please try another move!");
+            throw new IllegalMoveException("The next move in this direction is outside of the game board, please try another move!");
         }
     }
 
-    public void moveDown() {
+    public void moveDown() throws IllegalMoveException {
         if (this.getHero().getPosY() < this.getGameBoard().getSizeY() - 1) {
             move(0, 1);
         } else {
-            System.out.println("The next move in this direction is outside of the game board, please try another move!");
+            throw new IllegalMoveException("The next move in this direction is outside of the game board, please try another move!");
         }
     }
 
-    public void moveUp() {
+    public void moveUp() throws IllegalMoveException {
         if (this.getHero().getPosY() > 0) {
             move(0, -1);
         } else {
-            System.out.println("The next move in this direction is outside of the game board, please try another move!");
+            throw new IllegalMoveException("The next move in this direction is outside of the game board, please try another move!");
         }
     }
 
@@ -70,28 +74,38 @@ public class Game {
                && this.getHero().getPosX() == gameBoard.getSizeX() - 1 && this.getHero().getPosY() == gameBoard.getSizeY() - 1;
     }
 
-    public void runGame() {
+    public void runGame() throws IllegalMoveException {
         Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
-        while (!isWon()) {
+        while (!isWon() && !this.hero.isKilled()) {
             gameBoard.printGameBoard();
 
             System.out.println("Please enter the first letter of the desired direction:");
             String userInput = scanner.nextLine().toLowerCase();
-            while (!List.of("u", "d", "l", "r").contains(userInput)) {
+            while (!List.of("u", "d", "l", "r", "su", "sr", "sd", "sl").contains(userInput)) {
                 System.out.println("This input is not recognized, please enter again!");
                 userInput = scanner.nextLine().toLowerCase();
             }
-            switch (userInput) {
-                case "l" -> moveLeft();
-                case "r" -> moveRight();
-                case "d" -> moveDown();
-                case "u" -> moveUp();
-                default -> System.out.println("This input is not recognized, please enter again!");
+            try {
+                switch (userInput) {
+                    case "l" -> moveLeft();
+                    case "r" -> moveRight();
+                    case "d" -> moveDown();
+                    case "u" -> moveUp();
+                    case "su" -> hero.useSpecialPower('U');
+                    case "sr" -> hero.useSpecialPower('R');
+                    case "sd" -> hero.useSpecialPower('D');
+                    case "sl" -> hero.useSpecialPower('L');
+                    default -> System.out.println("This input is not recognized, please enter again!");
+                }
+            } catch (IllegalMoveException e) {
+                System.out.println(e.getMessage());
             }
         }
-
-        System.out.println("Hero has reached the goal!");
-
+        if (hero.isKilled()) {
+            System.out.println("Hero has been killed by a Monster!");
+        } else {
+            System.out.println("Hero has reached the goal!");
+        }
     }
 
     @NonNull
