@@ -23,7 +23,7 @@ public class Hunter extends Hero {
     }
 
     @Override
-    public boolean isKilled(){
+    public boolean isKilled() {
         return isKilled;
     }
 

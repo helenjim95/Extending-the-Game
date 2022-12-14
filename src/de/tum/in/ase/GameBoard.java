@@ -21,7 +21,7 @@ public class GameBoard {
 
     private int maxMonsters;
     private List<Monster> monsters;
-    private final int MAGICNUMBER = 3;
+    private static final int magicNumber = 3;
 
     public GameBoard(int sizeX, int sizeY) {
         this.sizeX = Math.max(sizeX, MIN_SIZE);
@@ -37,7 +37,7 @@ public class GameBoard {
 
         this.boardMatrix[0][0] = HERO;
         this.boardMatrix[this.sizeX - 1][this.sizeY - 1] = GOAL;
-        this.maxMonsters = sizeX * sizeY / MAGICNUMBER;
+        this.maxMonsters = sizeX * sizeY / magicNumber;
         this.monsters = new ArrayList<>();
         this.generateMonster();
     }
@@ -109,7 +109,7 @@ public class GameBoard {
     }
 
     public void generateMonster() {
-        if (this.monsters.size() < this.maxMonsters) {
+        while (this.monsters.size() < this.maxMonsters) {
             int x = StudentRandom.randomInt(0, this.sizeX - 1);
             int y = StudentRandom.randomInt(0, this.sizeY - 1);
             if (this.get(x, y) == EMPTY) {
