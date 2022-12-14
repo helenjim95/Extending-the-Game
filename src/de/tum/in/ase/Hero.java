@@ -8,7 +8,7 @@ public abstract class Hero {
     protected int posY;
     protected Game game;
 
-    public Hero(Game game) {
+    protected Hero(Game game) {
         this.posX = 0;
         this.posY = 0;
         this.game = game;

@@ -51,10 +51,8 @@ public class Mage extends Hero {
             }
         }
     }
-
     @Override
     public boolean isKilled() {
         return false;
     }
-
 }

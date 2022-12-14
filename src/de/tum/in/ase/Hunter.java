@@ -72,39 +72,39 @@ public class Hunter extends Hero {
         if (!ajacentToMonster) {
             throw new IllegalMoveException("Hhunter is not adjacent to any monster.");
         } else {
-                switch (option) {
-                    case 'U':
-                        if (!monsterAbove) {
-                            throw new IllegalMoveException("there's no monster above you");
-                        } else {
-                            this.killMonster(monsters.get(index));
-                        }
-                        break;
-                    case 'R':
-                        if (!monsterToRight) {
-                            throw new IllegalMoveException("there's no monster to your right");
-                        } else {
-                            this.killMonster(monsters.get(index));
-                        }
-                        break;
-                    case 'D':
-                        if (!monsterBelow) {
-                            throw new IllegalMoveException("there's no monster below you");
-                        } else {
-                            this.killMonster(monsters.get(index));
-                        }
-                        break;
-                    case 'L':
-                        if (!monsterToLeft) {
-                            throw new IllegalMoveException("there's no monster to your left");
-                        } else {
-                            this.killMonster(monsters.get(index));
-                        }
-                        break;
-                    default:
-                        throw new IllegalMoveException("Illegal move: unknown option");
-                }
+            switch (option) {
+                case 'U':
+                    if (!monsterAbove) {
+                        throw new IllegalMoveException("there's no monster above you");
+                    } else {
+                        this.killMonster(monsters.get(index));
+                    }
+                    break;
+                case 'R':
+                    if (!monsterToRight) {
+                        throw new IllegalMoveException("there's no monster to your right");
+                    } else {
+                        this.killMonster(monsters.get(index));
+                    }
+                    break;
+                case 'D':
+                    if (!monsterBelow) {
+                        throw new IllegalMoveException("there's no monster below you");
+                    } else {
+                        this.killMonster(monsters.get(index));
+                    }
+                    break;
+                case 'L':
+                    if (!monsterToLeft) {
+                        throw new IllegalMoveException("there's no monster to your left");
+                    } else {
+                        this.killMonster(monsters.get(index));
+                    }
+                    break;
+                default:
+                    throw new IllegalMoveException("Illegal move: unknown option");
             }
+        }
     }
 
 }

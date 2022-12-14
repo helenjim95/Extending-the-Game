@@ -7,7 +7,6 @@ package de.tum.in.ase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class GameBoard {
 
@@ -22,6 +21,7 @@ public class GameBoard {
 
     private int maxMonsters;
     private List<Monster> monsters;
+    private final int MAGICNUMBER = 3;
 
     public GameBoard(int sizeX, int sizeY) {
         this.sizeX = Math.max(sizeX, MIN_SIZE);
@@ -37,7 +37,7 @@ public class GameBoard {
 
         this.boardMatrix[0][0] = HERO;
         this.boardMatrix[this.sizeX - 1][this.sizeY - 1] = GOAL;
-        this.maxMonsters = sizeX * sizeY / 3;
+        this.maxMonsters = sizeX * sizeY / MAGICNUMBER;
         this.monsters = new ArrayList<>();
         this.generateMonster();
     }
