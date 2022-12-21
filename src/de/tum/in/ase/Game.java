@@ -78,7 +78,7 @@ public class Game {
     return gameBoard.get(this.getHero().getPosX(), this.getHero().getPosY()) == 'M';
     }
 
-    public void runGame() throws IllegalMoveException {
+    public void runGame() {
         Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
         while (!isWon() && (!this.hero.isKilled() || !touchMonster())) {
             gameBoard.printGameBoard();
@@ -108,7 +108,7 @@ public class Game {
                     default -> System.out.println("This input is not recognized, please enter again!");
                 }
             } catch (IllegalMoveException e) {
-                throw new IllegalMoveException(e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
         if (this.hero.isKilled() || touchMonster()) {
