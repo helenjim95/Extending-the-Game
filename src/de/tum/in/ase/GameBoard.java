@@ -111,15 +111,13 @@ public class GameBoard {
     }
 
     public void generateMonster() {
-        while (this.monsters.size() < this.maxMonsters) {
-            int x = StudentRandom.randomInt(0, this.sizeX - 1);
-            int y = StudentRandom.randomInt(0, this.sizeY - 1);
-            if (this.get(x, y) == '_') {
-                this.monsters.add(new Monster(x, y));
-                this.set(x, y, 'M');
-            } else {
-                generateMonster();
-            }
+        int x = StudentRandom.randomInt(0, this.sizeX - 1);
+        int y = StudentRandom.randomInt(0, this.sizeY - 1);
+        if (this.get(x, y) == '_') {
+            this.monsters.add(new Monster(x, y));
+            this.set(x, y, 'M');
+        } else {
+            generateMonster();
         }
     }
 }
