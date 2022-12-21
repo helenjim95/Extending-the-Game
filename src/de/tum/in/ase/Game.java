@@ -9,7 +9,7 @@ import java.util.Scanner;
 import static de.tum.in.ase.GameBoard.EMPTY;
 import static de.tum.in.ase.GameBoard.HERO;
 
-//TODO: The constructor shall take another parameter of enum "HeroType". This will decide which type of hero will be
+//The constructor shall take another parameter of enum "HeroType". This will decide which type of hero will be
 // used in the game.
 // Extend the "runGame" so that it will also read "su","sr","sd" and "sl" not paying attention to upper and lower cases
 // as inputs for calling the "useSpecialMethod(char option)" with its respective options.
@@ -80,7 +80,7 @@ public class Game {
 
     public void runGame() throws IllegalMoveException {
         Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
-        while (!isWon() && !this.hero.isKilled() && !touchMonster()) {
+        while (!isWon() && (!this.hero.isKilled() || !touchMonster())) {
             gameBoard.printGameBoard();
             List<String> validInput = List.of("u", "d", "l", "r", "su", "sr", "sd", "sl");
             boolean isValid = false;
@@ -111,7 +111,7 @@ public class Game {
                 System.out.println(e.getMessage());
             }
         }
-        if (this.hero.isKilled()) {
+        if (this.hero.isKilled() || touchMonster()) {
             System.out.println("Hero has been killed by a Monster!");
         } else {
             System.out.println("Hero has reached the goal!");
