@@ -39,7 +39,9 @@ public class GameBoard {
         this.boardMatrix[this.sizeX - 1][this.sizeY - 1] = GOAL;
         this.maxMonsters = sizeX * sizeY / MAGICNUMBER;
         this.monsters = new ArrayList<>();
-        this.generateMonster();
+        for (int i = 0; i < this.maxMonsters; i++) {
+            this.generateMonster();
+        }
     }
 
     public char get(int x, int y) {
