@@ -1,6 +1,6 @@
 package de.tum.in.ase;
 
-//TODO: Add attributes "monsters" which is a list of monsters and also "maxMonsters" which is an int to limit how
+//Add attributes "monsters" which is a list of monsters and also "maxMonsters" which is an int to limit how
 // many monsters we want to have in the game. Don't forget the getters and setters!
 // Also add a new method called "generateMonster" which will add a monster randomly on the map when the number of the
 // monsters is still lower than "maxMonsters".

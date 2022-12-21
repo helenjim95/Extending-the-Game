@@ -108,7 +108,7 @@ public class Game {
                     default -> System.out.println("This input is not recognized, please enter again!");
                 }
             } catch (IllegalMoveException e) {
-                System.out.println(e.getMessage());
+                throw new IllegalMoveException(e.getMessage());
             }
         }
         if (this.hero.isKilled() || touchMonster()) {
