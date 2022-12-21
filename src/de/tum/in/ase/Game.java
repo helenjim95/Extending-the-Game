@@ -74,9 +74,13 @@ public class Game {
                && this.getHero().getPosX() == gameBoard.getSizeX() - 1 && this.getHero().getPosY() == gameBoard.getSizeY() - 1;
     }
 
+    public boolean touchMonster() {
+    return gameBoard.get(this.getHero().getPosX(), this.getHero().getPosY()) == 'M';
+    }
+
     public void runGame() throws IllegalMoveException {
         Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8);
-        while (!isWon() && !this.hero.isKilled()) {
+        while (!isWon() && !this.hero.isKilled() && !touchMonster()) {
             gameBoard.printGameBoard();
             List<String> validInput = List.of("u", "d", "l", "r", "su", "sr", "sd", "sl");
             boolean isValid = false;
@@ -109,10 +113,8 @@ public class Game {
         }
         if (this.hero.isKilled()) {
             System.out.println("Hero has been killed by a Monster!");
-            System.exit(0);
         } else {
             System.out.println("Hero has reached the goal!");
-            System.exit(0);
         }
     }
 
