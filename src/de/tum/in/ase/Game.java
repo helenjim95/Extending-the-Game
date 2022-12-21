@@ -107,10 +107,12 @@ public class Game {
                 System.out.println(e.getMessage());
             }
         }
-        if (hero.isKilled()) {
+        if (this.hero.isKilled()) {
             System.out.println("Hero has been killed by a Monster!");
+            System.exit(0);
         } else {
             System.out.println("Hero has reached the goal!");
+            System.exit(0);
         }
     }
 
